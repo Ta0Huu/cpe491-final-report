@@ -5,8 +5,6 @@
 \fi
 }
 
-ในบทนี้จะกล่าวถึงหลักการ และการออกแบบระบบ
-
 \makeatletter
 
 % \renewcommand\section{\@startsection {section}{1}{\z@}%
@@ -19,79 +17,65 @@
 % \titleformat{\section}{\normalfont\bfseries}{\thesection}{1em}{}
 % \titlespacing*{\section}{0pt}{10ex}{0pt}
 
-\section{Alice in Wonderland}
+\section{โครงสร้างโดยรวมของโครงงาน (project overview) }
+\begin{mypara}
+    \indent โครงงานนนี้เป็นระบบสนับสนุนการตัดสินใจสำหรับการวางแผนระบบขนส่งสาธารณะ 
+    โดยจะจัดทำเป็นเว็บแอพลิเคชั่นสำหรับการจำลอง และมีการสรุปผลลัพธ์ที่ได้จากการจำลองในรูปแบบทางสถิติ
+    ซึ่งในการทำงานของระบบนี้จะมี 4 องค์ประกอบหลักดังนี้  
+    
+\end{mypara}
 
+% --- Overview figure: placed to appear before the `input` subsection and scaled to fit page ---
 \begin{figure}
-\begin{center}
-\includegraphics{800px-Briny_Beach.jpg}
-\end{center}
-\caption[Poem]{The Walrus and the Carpenter}
-\label{fig:walrus}
+% width=\textwidth keeps it within the text block; height limits it to most of the page height
+\includegraphics[width=\textwidth,height=0.9\textheight,keepaspectratio]{overview.png}
+\caption[Poem]{แผนภาพโดยรวมของโครงงาน}
+\label{fig:overview}
 \end{figure}
 
-\subsection{The Black Kitten}
-  One thing was certain, that the WHITE kitten had had nothing to
-do with it:---it was the black kitten's fault entirely~\cite{aiw}.  For the
-white kitten had been having its face washed by the old cat for
-the last quarter of an hour (and bearing it pretty well,
-considering); so you see that it COULDN'T have had any hand in
-the mischief.
+\subsection{input}
+  \indent จะเป็นส่วนที่รับข้อมูลจากผู้ใช้ที่จะมีการเปลี่ยนแปลงอยู่เสมอ ได้แก่ เส้นทางการให้บริการของรถ 
+  ตารางการเดินรถ และช่วงเวลาที่ต้องการนำมาจำลอง ข้อมูลของรถ
 
-  The way Dinah washed her children's faces was this:  first she
-held the poor thing down by its ear with one paw, and then with
-the other paw she rubbed its face all over, the wrong way,
-beginning at the nose:  and just now, as I said, she was hard at
-work on the white kitten, which was lying quite still and trying
-to purr---no doubt feeling that it was all meant for its good.
+\subsection{configuration data}
+  \indent จะเป็นส่วนของข้อมูลที่ใช้เป็นพื้นฐานในการจำลองซึ่งจะไม่ค่อยมีการเปลี่ยนแปลงบ่อย 
+  ได้แก่ ข้อมูลการมาถึงสถานีของผู้โดยสาร ข้อมูลการลงรถของผู้โดยสาร ตำแหน่งของสถานี ข้อมูลระยะทางระหว่างสถานี
+  
+\subsection{simulation engine}
+  \indent จะเป็นส่วนที่ทำหน้าที่ในการจำลองระบบขนส่งสาธารณะโดยรถบัสตามข้อมูลที่ได้รับจากส่วน input 
+  และ configuration data ซึ่งจะใช้เทคนิคการจำลองแบบเหตุการณ์ไม่ต่อเนื่อง (discrete-event simulation) 
+  ในการจำลองระบบขนส่งสาธารณะโดยรถบัส
 
-  But the black kitten had been finished with earlier in the
-afternoon, and so, while Alice was sitting curled up in a corner
-of the great arm-chair, half talking to herself and half asleep,
-the kitten had been having a grand game of romps with the ball of
-worsted Alice had been trying to wind up, and had been rolling it
-up and down till it had all come undone again; and there it was,
-spread over the hearth-rug, all knots and tangles, with the
-kitten running after its own tail in the middle.
+\subsection{output}
+  \indent จะเป็นส่วนที่แสดงผลลัพธ์ที่ได้จากการจำลอง
 
-\subsection{The Reproach}
+\section{ ขั้นตอนการทำงาน (Process Overview)}
+\begin{mypara}
+    \indent โครงงานนี้ทำงานโดยการนำข้อมูลจากผู้ใช้ (input) มาจำลองระบบขนส่งสาธารณะ 
+    โดยอ้างอิงข้อมูลพื้นฐานจาก configuration data ซึ่งประกอบด้วยข้อมูลสถานี ข้อมูลระยะทางระหว่างสถานี 
+    และข้อมูลพฤติกรรมของผู้โดยสาร หลังจากนั้นระบบจำลอง (simulation engine) จะประมวลผล 
+    โดยใช้เทคนิคการจำลองแบบเหตุการณ์ไม่ต่อเนื่อง (discrete-event simulation) 
+    เพื่อสร้างผลลัพธ์เชิงสถิติที่แสดงถึงประสิทธิภาพและความหนาแน่นของระบบขนส่ง 
+\end{mypara}
 
-  `Oh, you wicked little thing!' cried Alice, catching up the
-kitten, and giving it a little kiss to make it understand that it
-was in disgrace.  `Really, Dinah ought to have taught you better
-manners!  You OUGHT, Dinah, you know you ought!' she added,
-looking reproachfully at the old cat, and speaking in as cross a
-voice as she could manage---and then she scrambled back into the
-arm-chair, taking the kitten and the worsted with her, and began
-winding up the ball again.  But she didn't get on very fast, as
-she was talking all the time, sometimes to the kitten, and
-sometimes to herself.  Kitty sat very demurely on her knee,
-pretending to watch the progress of the winding, and now and then
-putting out one paw and gently touching the ball, as if it would
-be glad to help, if it might.
+\section{User Interface (UI)}
+\begin{mypara}
+    \indent โครงงานนี้มีการออกแบบส่วนติดต่อผู้ใช้ (User Interface: UI) 
+    เพื่อให้ผู้ใช้สามารถป้อนข้อมูลที่จำเป็นสำหรับการจำลองระบบขนส่งสาธารณะได้อย่างง่ายดาย 
+    โดย UI จะประกอบด้วยฟอร์มสำหรับกรอกข้อมูลเส้นทางการให้บริการของรถ ตารางการเดินรถ 
+    และช่วงเวลาที่ต้องการนำมาจำลอง นอกจากนี้ยังมีการแสดงผลลัพธ์ที่ได้จากการจำลองในรูปแบบกราฟและตารางสถิติ 
+    เพื่อช่วยให้ผู้ใช้สามารถวิเคราะห์และตัดสินใจเกี่ยวกับการวางแผนระบบขนส่งได้อย่างมีประสิทธิภาพ
+\end{mypara}
 
-  `Do you know what to-morrow is, Kitty?' Alice began.  `You'd
-have guessed if you'd been up in the window with me---only Dinah
-was making you tidy, so you couldn't.  I was watching the boys
-getting in stick for the bonfire---and it wants plenty of
-sticks, Kitty!  Only it got so cold, and it snowed so, they had
-to leave off.  Never mind, Kitty, we'll go and see the bonfire
-to-morrow.'  Here Alice wound two or three turns of the worsted
-round the kitten's neck, just to see how it would look:  this led
-to a scramble, in which the ball rolled down upon the floor, and
-yards and yards of it got unwound again.
+\subsection{การจัดกลุ่มผู้ใช้ (User Grouping)}
+\indent โครงงานนี้มีการจัดกลุ่มผู้ใช้เป็น 2 กลุ่มหลัก ได้แก่
+\begin{itemize}
+    \item ผู้ใช้ที่ลงทะเบียน (Registered Users): กลุ่มนี้เป็นผู้ใช้ที่สร้างบัญชีและเข้าสู่ระบบเรียบร้อยแล้ว 
+    สามารถเข้าถึงฟังก์ชันทั้งหมดของระบบ รวมถึงบันทึกการจำลอง การตั้งค่าโปรไฟล์ และการเข้าถึงข้อมูลส่วนตัว
+    \item ผู้ใช้ที่ไม่ได้ลงทะเบียน (Guest Users / Unregistered Users): กลุ่มนี้เป็นผู้ใช้ทั่วไปที่ไม่ได้สร้างบัญชี 
+    สามารถใช้ระบบจำลองได้แบบจำกัดฟังก์ชัน เช่น ทำการจำลองและดูผลลัพธ์ได้ชั่วคราว 
+    แต่ไม่สามารถบันทึกหรือเข้าถึงข้อมูลส่วนตัวได้
+\end{itemize}
 
-  `Do you know, I was so angry, Kitty,' Alice went on as soon as
-they were comfortably settled again, `when I saw all the mischief
-you had been doing, I was very nearly opening the window, and
-putting you out into the snow!  And you'd have deserved it, you
-little mischievous darling!  What have you got to say for
-yourself?  Now don't interrupt me!' she went on, holding up one
-finger.  `I'm going to tell you all your faults.  Number one:
-you squeaked twice while Dinah was washing your face this
-morning.  Now you can't deny it, Kitty:  I heard you!  What that
-you say?' (pretending that the kitten was speaking.)  `Her paw
-went into your eye?  Well, that's YOUR fault, for keeping your
-eyes open---if you'd shut them tight up, it wouldn't have
-happened.  Now don't make any more excuses, but listen!  Number
-two:  you pulled Snowdrop away by the tail just as I had put down
-the saucer of milk before her!  What, you were thirsty, were you?
+\section{user flow}
+
