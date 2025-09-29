@@ -17,7 +17,7 @@
 % \titleformat{\section}{\normalfont\bfseries}{\thesection}{1em}{}
 % \titlespacing*{\section}{0pt}{10ex}{0pt}
 
-\section{โครงสร้างโดยรวมของโครงงาน (project overview) }
+\section{โครงสร้างโดยรวมของโครงงาน (Project Overview) }
 \begin{mypara}
     \indent โครงงานนี้เป็นระบบสนับสนุนการตัดสินใจสำหรับการวางแผนระบบขนส่งสาธารณะ 
     โดยจะจัดทำเป็นเว็บแอพลิเคชั่นสำหรับการจำลอง และมีการสรุปผลลัพธ์ที่ได้จากการจำลองในรูปแบบทางสถิติ
@@ -32,28 +32,30 @@
     \label{fig:overview}
 \end{figure}
 
-\subsection{input}
+\subsection{Input}
 \begin{mypara}
-  \indent เป็นส่วนที่รับข้อมูลจากผู้ใช้ที่จะมีการเปลี่ยนแปลงอยู่เสมอ ได้แก่ เส้นทางการให้บริการของรถในแต่ละสายบริการ 
-  ตารางเวลาการออกรถ ช่วงเวลาที่ต้องการดูผลการจำลอง ข้อมูลของรถซึ่งมี ความจุผู้โดยสาร ระยะทางที่สามารถวิ่งได้สูงสุด 
-  ความเร็วในการวิ่ง
+  \indent เป็นข้อมูลที่ผู้ใช้สามารถปรับเปลี่ยนพารามิเตอร์ได้บ่อย ๆ เพื่อจำลองสถานการณ์ต่าง ๆ 
+  สำหรับการเปรียบเทียบและวางแผน ประกอบด้วย เส้นทางการให้บริการของรถในแต่ละสายบริการ 
+  ตารางเวลาการออกรถ ช่วงเวลาที่ต้องการดูผลการจําลอง ข้อมูลของรถซึ่งมี 
+  ความจุผู้โดยสารระยะทางที่สามารถวิ่งได้สูงสุด ความเร็วในการวิ่ง
 \end{mypara}
-\subsection{configuration data}
+\subsection{Configuration Data}
 \begin{mypara}
   \indent เป็นส่วนของข้อมูลที่ใช้เป็นพื้นฐานในการจำลองซึ่งจะไม่ค่อยมีการเปลี่ยนแปลงบ่อย 
   ได้แก่ ข้อมูลช่วงระยะห่างของเวลาที่ผู้โดยสารแต่ละคนมาถึงที่สถานี ข้อมูลของจำนวนผู้โดยสารที่ลงจากรถในแต่ละสถานี 
   และข้อมูลที่เกี่ยวข้องกับสถานีซึ่งจะเก็บในรูปแบบของ network model ซึ่งจะมี 
   node เป็นรายชื่อสถานี และ มี edge เป็นระยะทางละหว่างแต่ละสถานี
   \end{mypara}
-\subsection{simulation engine}
+\subsection{Simulation Engine}
 \begin{mypara}
   \indent เป็นส่วนที่ทำหน้าที่ในการจำลองระบบขนส่งสาธารณะตามข้อมูลที่ได้รับจากส่วน input 
   และ configuration data ซึ่งจะใช้เทคนิคการจำลองแบบเหตุการณ์ไม่ต่อเนื่อง (discrete-event simulation) 
   ในการจำลองระบบขนส่งสาธารณะ 
 \end{mypara}
-\subsection{output}
+\subsection{Output}
 \begin{mypara}
   \indent เป็นส่วนที่แสดงผลลัพธ์ที่ได้จากการจำลอง โดยจะมีข้อมูล การรอเฉลี่ยของผู้โดยสาร อัตราการใช้งานของรถ 
+  และอัตราการเกิดเหตุการณ์ที่รถบัสมีการใช้งานเกินเวลาหรือระยะทางที่กำหนด
   ซึ่งจะมีข้อมูลแสดงทั้งข้อมูลรวมทุกสถานี และข้อมูลรายละเอียดของแต่ละสถานีแยกกัน รวมถึงจะมี dashboard 
   สำหรับแสดงผลลัพธ์ในรูปแบบกราฟเพื่อให้ผู้ใช้สามารถวิเคราะห์ข้อมูลได้ง่ายขึ้น
 \end{mypara}
@@ -95,11 +97,19 @@
     แต่ไม่สามารถบันทึกข้อมูลได้
 \end{itemize}
 \end{mypara}
-\section{user flow}
+\section{User Flow}
 
 \begin{mypara}
 
 \begin{itemize}
+    \item ผู้ใช้ที่ไม่ได้ลงทะเบียน (Guest Users / Unregistered Users)
+    \begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth,height=0.9\textheight,keepaspectratio]{User_flow_-_guest.png}
+    \caption{user flow  ของผู้ใช้ที่ไม่ได้ลงทะเบียน}
+    \label{fig:UserFlowUnregistered}
+    \end{figure}
+    \newpage
     \item ผู้ใช้ที่ลงทะเบียน (Registered Users)
     \begin{figure}[H]
     \centering
@@ -107,13 +117,176 @@
     \caption{user flow ของผู้ใช้ที่ลงทะเบียน}
     \label{fig:UserFlowRegistered}
     \end{figure}
-    \newpage
-    \item ผู้ใช้ที่ไม่ได้ลงทะเบียน (Guest Users / Unregistered Users)
-        \begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth,height=0.9\textheight,keepaspectratio]{User_flow_-_guest.png}
-    \caption{user flow  ของผู้ใช้ที่ไม่ได้ลงทะเบียน}
-    \label{fig:UserFlowUnregistered}
-    \end{figure}
+    
+
 \end{itemize}
+\end{mypara}
+\newpage
+\section{wireframe}
+\begin{mypara}
+    \indent โครงงานนี้มีการออกแบบ wireframe สำหรับหน้าต่างๆ ของระบบ 
+    เพื่อใช้เป็นแนวทางในการพัฒนาและทดสอบระบบ โดย wireframe ที่ออกแบบมีดังนี้
+\subsection{wireframe ผู้ใช้ที่ไม่ได้ลงทะเบียน (Guest Users / Unregistered Users)}
+\begin{itemize}
+    \item Step 1: ผู้ใช้เข้าหน้า Landing page เพื่อเลือกระหว่าง guest และ Login
+    \begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.4]
+    {homepage.png}
+    \caption{wireframe ของหน้า Landing page}
+    \label{fig:WireframeHomepage}
+    \end{figure}
+    \item Step 2: Guest เลือกว่าจะใช้ข้อมูลที่อยู่ใน community หรือ Setup configuration เอง
+    \begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.4]
+    {guest_login.png}
+    \caption{wireframe ของหน้า Guest decision}
+    \label{fig:WireframeGuestDecision}
+    \end{figure}
+    \item Step 3: การใช้ข้อมูล Configuration Data
+    \begin{itemize}
+        \item ใช้จากข้อมูลที่อยู่ใน community
+        \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.4]{conf_commu_guest.png}
+        \caption{wireframe ของหน้า Community configuration data}
+        \label{fig:WireframeCommunityConfigGuest}
+        \end{figure}
+
+        \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.4]{conf_commu_detail_guest.png}
+        \caption{wireframe ของหน้ารายละเอียด configuration data ใน community}
+        \label{fig:WireframeCommunityConfigDetailGuest}
+        \end{figure}
+
+        \item Setup configuration เอง
+        \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.4]{conf_setup_guest.png}
+        \caption{wireframe ของหน้า Setup configuration data สำหรับ guest}
+        \label{fig:WireframeSetupConfigGuest}
+        \end{figure}
+    \end{itemize}
+    \item Step 4: หน้า input page เพื่อกรอกข้อมูล input ต่างๆ
+    \begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.4]{input_bus.png}
+    \caption{wireframe ของหน้า input page (bus) }
+    \label{fig:WireframeInputGuest}
+    \end{figure}
+    \begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.4]{input_route.png}
+    \caption{wireframe ของหน้า input page (route) }
+    \label{fig:WireframeInputRouteGuest}
+    \end{figure}
+    \item Step 5:หลัง Run simulation แล้ว user จะสามารถเลือกดู  Dashboard สรุปผลข้อมูล 
+    หรือ Interacting Visualize
+    \begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.4]{output_show.png}
+    \caption{wireframe ของหน้าแสดงผลลัพธ์หลังจาก run simulation}
+    \label{fig:WireframeOutputGuest}
+    \end{figure} 
+
+    \begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.4]{dashboard.png}
+    \caption{wireframe ของหน้า Dashboard }
+    \label{fig:WireframeDashboardGuest}
+    \end{figure}
+    
+\end{itemize} 
+
+
+\subsection{wireframe ของผู้ใช้ที่ลงทะเบียน (Registered Users)}
+\begin{itemize}
+    \item Step 1: ผู้ใช้เข้าหน้า Landing page เพื่อเลือกระหว่าง guest และ Login
+    \begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.4]
+    {homepage.png}
+    \caption{wireframe ของหน้า Landing page}
+    \label{fig:WireframeHomepageLogin}
+    \end{figure}
+    \item Step 2: My work จัดการงานของผู้ใช้
+    \begin{itemize}
+      \item My work เลือกใช้งานหรือ publish งาน
+      \begin{figure}[H]
+      \centering
+      \includegraphics[scale=0.4]{my_work.png} 
+      \caption{wireframe ของหน้า My work}
+      \label{fig:WireframeMyWork}
+      \end{figure}
+      \item  New work ซึ่งสามารถสร้าง work จาก config ที่มีอยู่
+      \begin{figure}[H]
+      \centering
+      \includegraphics[scale=0.4]{new_work.png}
+      \caption{wireframe ของหน้า New work}
+      \label{fig:WireframeNewWork}
+      \end{figure}
+    \end{itemize}
+    \item Step 3: การใช้ข้อมูล Configuration Data
+    \begin{itemize}
+        \item ใช้จากข้อมูลที่อยู่ใน community
+        \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.4]{conf_commu.png}
+        \caption{wireframe ของหน้า Community configuration data}
+        \label{fig:WireframeCommunityConfigLogin}
+        \end{figure}
+
+        \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.4]{conf_commu_detail_reg.png}
+        \caption{wireframe ของหน้ารายละเอียด configuration data ใน community}
+        \label{fig:WireframeCommunityConfigDetailLogin}
+        \end{figure}
+
+        \item New configuration สร้าง config ใหม่และสามารถ save config ได้
+        \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.4]{new_conf.png}
+        \caption{wireframe ของหน้า New configuration data}
+        \label{fig:WireframeNewConfigLogin}
+        \end{figure}
+        \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.4]{conf_setup_reg.png}
+        \caption{wireframe ของหน้า Setup configuration data สำหรับผู้ใช้ที่ลงทะเบียน}
+        \label{fig:WireframeSetupConfigLogin}
+        \end{figure}
+
+    \end{itemize}
+    \item Step 4: หน้า input page เพื่อกรอกข้อมูล input ต่างๆ
+    \begin{figure}[H]
+    \centering 
+    \includegraphics[scale=0.4]{input_bus.png}
+    \caption{wireframe ของหน้า input page (bus) }
+    \label{fig:WireframeInputLogin}
+    \end{figure}
+    \begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.4]{input_route.png}
+    \caption{wireframe ของหน้า input page (route) }
+    \label{fig:WireframeInputRouteLogin}
+    \end{figure}
+    \item Step 5:หลัง Run simulation แล้ว user จะสามารถเลือกดู  Dashboard สรุปผลข้อมูล
+    หรือ Interacting Visualize
+    \begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.4]{output_show.png}
+    \caption{wireframe ของหน้าแสดงผลลัพธ์หลังจาก run simulation}
+    \label{fig:WireframeOutputLogin}
+    \end{figure}
+    \begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.4]{dashboard.png}
+    \caption{wireframe ของหน้า Dashboard }
+    \label{fig:WireframeDashboardLogin}
+    \end{figure}
+    \end{itemize}
+
 \end{mypara}
