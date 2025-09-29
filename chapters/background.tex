@@ -6,6 +6,118 @@
   และให้ผลลัพธ์ใกล้เคียงกับความเป็นจริง ในบทนี้จะอธิบายแนวคิดและทฤษฎีที่เกี่ยวข้องกับการพัฒนาระบบดังกล่าว
 
 \section{Platform Development}
+
+\subsection{Frontend Display}
+\subsubsection{Vite}
+\indent Vite เป็น Frontend Build Tool และ Development Server ที่ออกแบบเพื่อปรับปรุงประสบการณ์การพัฒนาเว็บแอปพลิเคชันสมัยใหม่ มีจุดเด่นเรื่อง \textbf{ความเร็วสูง} และ \textbf{HMR (Hot Module Replacement) แบบเรียลไทม์} ทำให้การพัฒนา Frontend ราบรื่นและสนุกยิ่งขึ้น  
+
+\begin{itemize}
+    \item \textbf{Native ES Modules}: ใช้ฟีเจอร์ ES Modules ของเบราว์เซอร์ ทำให้ไม่ต้อง Bundle ทั้งโปรเจกต์ในระหว่าง Development
+    \item \textbf{Instant Server Start}: เริ่ม Development Server ได้ทันทีโดยไม่ต้องรอ Build
+    \item \textbf{Hot Module Replacement (HMR)}: เปลี่ยนแปลงโค้ดแล้วเห็นผลทันทีโดยไม่โหลดหน้าใหม่
+    \item \textbf{Optimized Production Build}: ใช้ Rollup สำหรับสร้างไฟล์ Production ที่มีประสิทธิภาพและขนาดเล็ก
+\end{itemize}
+
+ในระบบสนับสนุนการตัดสินใจด้านขนส่งสาธารณะ Vite ถูกใช้เป็น Frontend Build Tool สำหรับ Next.js เพื่อพัฒนา Interface ที่โต้ตอบกับ Backend (Go Fiber) 
+และแสดงผลข้อมูลเชิงพื้นที่/Simulation Model ดังนี้
+
+\begin{enumerate}
+    \item \textbf{Development Server และ HMR}
+    \begin{itemize}
+        \item พัฒนา UI/UX แบบ Interactive เช่น Map (Leaflet.js), Graph, และ Dashboard
+        \item เปลี่ยนแปลงโค้ดแล้วเห็นผลทันที ทำให้ปรับ Layout หรือ Data Visualization ได้รวดเร็ว
+    \end{itemize}
+    
+    \item \textbf{Integration กับ React / Next.js}
+    \begin{itemize}
+        \item ใช้ Vite เป็นเครื่องมือ Build สำหรับ Next.js/React Component
+        \item จัดการ Asset, CSS Module, และ ES Modules ได้ง่าย  
+        \item รองรับการทำ Code Splitting เพื่อลดขนาด Bundle และเพิ่ม Performance
+    \end{itemize}
+    
+    \item \textbf{Data Fetching และ API Consumption}
+    \begin{itemize}
+        \item Frontend ติดต่อกับ Backend (Go Fiber) ผ่าน RESTful API  
+        \item ดึงผลลัพธ์จาก Simulation Model หรือ PostGIS Spatial Query มาสร้าง Heatmap, Graph, หรือ Table แบบ Real-time
+    \end{itemize}
+    
+    \item \textbf{Optimized Production}
+    \begin{itemize}
+        \item Build ไฟล์ Production ขนาดเล็ก, Tree-Shaking, และ Minification  
+        \item ทำให้โหลดหน้าเว็บเร็วขึ้นแม้ข้อมูลเชิงพื้นที่หรือ Graph มีขนาดใหญ่
+    \end{itemize}
+\end{enumerate}
+
+\subsubsection{TypeScript}
+TypeScript เป็นภาษาโปรแกรมที่พัฒนาโดย Microsoft ซึ่งเป็น \textbf{superset ของ JavaScript} เพิ่มความสามารถด้าน \textbf{Static Typing} และ \textbf{Compile-Time Error Checking} ทำให้โค้ดมีความปลอดภัยและลดข้อผิดพลาดในระหว่างการพัฒนา  
+\begin{itemize}
+    \item \textbf{Static Typing}: ประกาศประเภทของตัวแปร, ฟังก์ชัน, และ Object ช่วยตรวจสอบข้อผิดพลาดก่อนรัน
+    \item \textbf{Enhanced IDE Support}: รองรับ IntelliSense, Auto-completion, และ Refactoring
+    \item \textbf{Compatibility}: สามารถรันโค้ด JavaScript ได้ทั้งหมด และ Compile เป็น JavaScript สำหรับ Browser หรือ Node.js
+    \item \textbf{Object-Oriented Features}: รองรับ Class, Interface, Generics และ Module System
+\end{itemize}
+
+TypeScript ถูกใช้เป็นภาษาหลักในการพัฒนา Frontend ของระบบ ด้วย Next.js และ Vite Framework เพื่อสร้าง Interface ที่โต้ตอบกับ Backend (Go Fiber) และ Visualize ผลลัพธ์ของ Simulation Model / GIS Data
+\begin{enumerate}
+    \item \textbf{Static Typing for API Data}
+    \begin{itemize}
+        \item กำหนด Interface สำหรับ Response จาก Backend เช่น Simulation Result, Spatial Data
+        \item ลดข้อผิดพลาดจากการเรียกใช้ JSON หรือ Object Property
+    \end{itemize}
+    
+    \item \textbf{Component-Based Development}
+    \begin{itemize}
+        \item สร้าง React Component แบบ Typed เพื่อ Map, Graph, Table
+        \item ใช้ Props และ State แบบ Type-Safe
+    \end{itemize}
+    
+    \item \textbf{Improved Maintainability}
+    \begin{itemize}
+        \item ทำให้ทีมสามารถ Refactor โค้ดได้ง่ายและปลอดภัย
+        \item รองรับการพัฒนา Feature ใหม่หรือปรับ UI/UX โดยไม่ทำลายระบบเดิม
+    \end{itemize}
+    
+    \item \textbf{Integration with Vite / Next.js}
+    \begin{itemize}
+        \item Vite รองรับการ Compile TypeScript ได้โดยตรง
+        \item TypeScript ช่วยให้การเชื่อมต่อ API, State Management, และ Component Interaction มีความปลอดภัยและมีประสิทธิภาพ
+    \end{itemize}
+\end{enumerate}
+
+\subsection{Logical Model}
+\subsubsection{Salabim}
+Salabim เป็น Python-based Discrete-Event Simulation (DES) framework ที่ออกแบบมาเพื่อสร้างและรันระบบจำลองเชิงเหตุการณ์ (Event-Driven Simulation) ได้อย่างยืดหยุ่นและชัดเจน 
+แนวคิดหลักของ Salabim ได้แก่:
+\begin{itemize}
+    \item \textbf{Discrete-Event Simulation}: ระบบเปลี่ยนแปลงสถานะเมื่อเกิดเหตุการณ์ (Event) เช่น การมาถึงของผู้โดยสาร การเคลื่อนที่ของรถ
+    \item \textbf{Process-Oriented Modeling}: ใช้ Process class สำหรับกำหนดพฤติกรรมของ Entities (เช่น รถโดยสาร)
+    \item \textbf{Resources}: สามารถกำหนด Resource, Queue, Priority Queue และเงื่อนไขการเข้าใช้
+    \item \textbf{Stochastic Modeling}: สนับสนุนการสุ่มเหตุการณ์และเวลาในการรอ เช่น Arrival Time, Service Time
+\end{itemize}
+
+\subsubsection{แนวคิดดังกล่าวจะถูกนํามาประยุกต์ใช้ในระบบของเรา โดยใช้ใน Logical Model ดังนี้}
+\begin{enumerate}
+    \item \textbf{การจำลองเหตุการณ์ของผู้โดยสารและรถ}
+    \begin{itemize}
+        \item Entities: รถโดยสาร, ผู้โดยสาร, ป้ายรถ
+        \item Events: Arrival, Departure, Boarding, Alighting
+        \item Process: กำหนดพฤติกรรม เช่น รถวิ่งตามเส้นทาง, ผู้โดยสารขึ้น/ลง
+    \end{itemize}
+    
+    \item \textbf{การจัดการทรัพยากร (Resource Management)}
+    \begin{itemize}
+        \item กำหนดจำนวนรถแต่ละเส้นทาง
+        \item วิเคราะห์ปัญหาเวลารอของผู้โดยสาร
+    \end{itemize}
+    
+    \item \textbf{การวิเคราะห์เชิงสถิติและผลลัพธ์}
+    \begin{itemize}
+        \item Collect Metrics: เวลาเฉลี่ยรอรถ, จำนวนผู้โดยสาร, ความหนาแน่น
+        \item Visualization: ส่งผลลัพธ์ไปยัง Heatmap หรือ Graph ของ Frontend
+        \item Scenario Analysis: ปรับจำนวนรถ, ตารางเวลา หรือเส้นทางเพื่อเปรียบเทียบประสิทธิภาพ
+    \end{itemize}
+\end{enumerate}
+
 \subsection{API Controller}
 % \subsubsection{Service-Oriented Architecture (SOA)}
 % \indent แนวทางการออกแบบสถาปัตยกรรมระบบซอฟต์แวร์โดยแยกฟังก์ชันการทำงานของระบบออกเป็น 
@@ -69,39 +181,6 @@
     \item สนับสนุนการพัฒนาแบบ Concurrent และ Real-time เช่น WebSocket สำหรับ Live Updates
 \end{enumerate}
 
-\subsection{Logical Model}
-\subsubsection{Salabim}
-Salabim เป็น Python-based Discrete-Event Simulation (DES) framework ที่ออกแบบมาเพื่อสร้างและรันระบบจำลองเชิงเหตุการณ์ (Event-Driven Simulation) ได้อย่างยืดหยุ่นและชัดเจน 
-แนวคิดหลักของ Salabim ได้แก่:
-\begin{itemize}
-    \item \textbf{Discrete-Event Simulation}: ระบบเปลี่ยนแปลงสถานะเมื่อเกิดเหตุการณ์ (Event) เช่น การมาถึงของผู้โดยสาร การเคลื่อนที่ของรถ
-    \item \textbf{Process-Oriented Modeling}: ใช้ Process class สำหรับกำหนดพฤติกรรมของ Entities (เช่น รถโดยสาร)
-    \item \textbf{Resources}: สามารถกำหนด Resource, Queue, Priority Queue และเงื่อนไขการเข้าใช้
-    \item \textbf{Stochastic Modeling}: สนับสนุนการสุ่มเหตุการณ์และเวลาในการรอ เช่น Arrival Time, Service Time
-\end{itemize}
-
-\subsubsection{แนวคิดดังกล่าวจะถูกนํามาประยุกต์ใช้ในระบบของเรา โดยใช้ใน Logical Model ดังนี้}
-\begin{enumerate}
-    \item \textbf{การจำลองเหตุการณ์ของผู้โดยสารและรถ}
-    \begin{itemize}
-        \item Entities: รถโดยสาร, ผู้โดยสาร, ป้ายรถ
-        \item Events: Arrival, Departure, Boarding, Alighting
-        \item Process: กำหนดพฤติกรรม เช่น รถวิ่งตามเส้นทาง, ผู้โดยสารขึ้น/ลง
-    \end{itemize}
-    
-    \item \textbf{การจัดการทรัพยากร (Resource Management)}
-    \begin{itemize}
-        \item กำหนดจำนวนรถแต่ละเส้นทาง
-        \item วิเคราะห์ปัญหาเวลารอของผู้โดยสาร
-    \end{itemize}
-    
-    \item \textbf{การวิเคราะห์เชิงสถิติและผลลัพธ์}
-    \begin{itemize}
-        \item Collect Metrics: เวลาเฉลี่ยรอรถ, จำนวนผู้โดยสาร, ความหนาแน่น
-        \item Visualization: ส่งผลลัพธ์ไปยัง Heatmap หรือ Graph ของ Frontend
-        \item Scenario Analysis: ปรับจำนวนรถ, ตารางเวลา หรือเส้นทางเพื่อเปรียบเทียบประสิทธิภาพ
-    \end{itemize}
-\end{enumerate}
 
 
 %\subsection{Display Frontend}
