@@ -1,56 +1,180 @@
 \chapter{\ifenglish Background Knowledge and Theory\else ทฤษฎีที่เกี่ยวข้อง\fi}
 
 \section{บทนำ}
-  \sloppy บทนี้เริ่มต้นด้วยการศึกษาทฤษฎี งานวิจัย และโครงงานที่เกี่ยวข้อง 
+  \sloppy\indent บทนี้เริ่มต้นด้วยการศึกษาทฤษฎี งานวิจัย และโครงงานที่เกี่ยวข้อง 
 เพื่อเป็นแนวทางในการออกแบบและพัฒนาเว็บระบบสนับสนุนการตัดสินใจสำหรับการวางแผนระบบขนส่งสาธารณะ
 โดยระบบดังกล่าวจะถูกออกแบบให้สามารถนำไปใช้กับ ระบบจำลอง (simulation) เพื่อให้ผลลัพธ์ใกล้เคียงกับของจริง
 ซึ่งในบทนี้จะอธิบายเนื้อหาเกี่ยวกับแนวคิดและทฤษฎีที่เกี่ยวข้อง
 
 \section{Platform Development}
 \subsection{API Controller และ Logical Model}
-\subsubsection{Service-Oriented Architecture (SOA)}
-Section 3 text. The dielectric constant\index{dielectric constant}
-at the air-metal interface determines
-the resonance shift\index{resonance shift} as absorption or capture occurs
-is shown in Equation~\eqref{eq:dielectric}:
+\subsubsection{Service-Oriented Architecture (SOA) / Microservices}
+\indent แนวทางการออกแบบสถาปัตยกรรมระบบซอฟต์แวร์โดยแยกฟังก์ชันการทำงานของระบบออกเป็น 
+Services ที่เป็นอิสระจากกัน แต่สามารถสื่อสารและประสานงานกันได้ผ่านโปรโตคอลมาตรฐาน
 
-\section{ความรู้ตามหลักสูตรซึ่งถูกนํามาใช้หรือบูรณาการในโครงงาน}
+\begin{itemize}
+    \item \textbf{SOA} มุ่งเน้นการให้บริการ (Service) ในระดับองค์กร โดยมักจะใช้ ESB (Enterprise Service Bus) เป็นตัวกลาง
+    \item \textbf{Microservices} เป็นวิวัฒนาการของ SOA ที่ลดความซับซ้อนของ ESB โดยให้แต่ละ Service เป็นอิสระเต็มที่ ใช้สื่อสารผ่าน API หรือ Event Driven
+\end{itemize}
 
-% define a command that produces some filler text, the lorem ipsum.
-\newcommand{\loremipsum}{
-  \textit{Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-  eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-  minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-  aliquip ex ea commodo consequat. Duis aute irure dolor in
-  reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-  pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-  culpa qui officia deserunt mollit anim id est laborum.}\par}
+\begin{center}
+\fbox{%
+  \parbox{.8\textwidth}{%
+งานวิจัยของ Newman (2015) เรื่อง "Building Microservices" และ Dragoni et al. (2017) เรื่อง "Microservices: yesterday, today, and tomorrow" อธิบายว่าการเปลี่ยนจาก SOA ไปเป็น Microservices ช่วยเพิ่มความยืดหยุ่น, scalability และ continuous delivery ได้ดีกว่าเดิม
+  }%
+}
+\end{center}
 
-\begin{figure}
-  \centering
+\indent แนวคิดดังกล่าวจะถูกนํามาประยุกต์ใช้ในระบบของเราโดยในโครงสร้างระบบนี้ สามารถมองเป็นการใช้แนวคิด Microservices ดังนี้
+\begin{enumerate}
+    \item \textbf{API Controller (FastAPI)}  
+    ทำหน้าที่เป็น Gateway Service หรือ API Gateway เป็นจุดรับและส่งข้อมูล (Request/Response) จากผู้ใช้หรือระบบภายนอก รวมถึงทำ Authentication, Load Balancing
+    \item \textbf{Logical Model (Simulation/Calculation)}  
+    ทำหน้าที่เป็น Processing Service รับข้อมูลจาก API Controller เพื่อทำ Simulation หรือการคำนวณเชิงตรรกะ สามารถรันเป็น Service แยก เช่นบน Container (Docker) หรือ Serverless Function เพื่อเพิ่ม scalability ได้
+    \item \textbf{Frontend (Next.js / Vite)}  
+    สื่อสารกับ Backend ผ่าน REST API สามารถ deploy หรืออัปเดต UI ได้โดยไม่กระทบ backend
+\end{enumerate}
 
-  \fbox{
-     \parbox{.6\textwidth}{\loremipsum}
-  }
+\subsubsection{RESTful API Design (Representational State Transfer)}
+\indent รูปแบบการออกแบบ API สำหรับให้ระบบคอมพิวเตอร์สื่อสารกันผ่านเว็บ 
+โดยแต่ละสิ่งที่ API จัดการจะถูกมองเป็นทรัพยากร (Resource) 
+เช่น ข้อมูลผู้ใช้ ข้อมูล Simulation หรือเส้นทางเดินทาง โดยแต่ละทรัพยากรจะมี URL เฉพาะ 
+และใช้ HTTP Methods (GET, POST, PUT, DELETE) เพื่อระบุการกระทำที่ต้องการกับทรัพยากรนั้น 
+ระบบจะส่งข้อมูลกลับในรูปแบบที่อ่านง่าย เช่น JSON การใช้ RESTful API ช่วยให้ Frontend 
+และ Backend แยกส่วนกันได้ชัดเจน เรียกใช้ Logic ที่ซับซ้อนผ่าน Request มาตรฐานได้ 
+และทำให้การพัฒนาระบบง่ายต่อการเข้าใจ ใช้ซ้ำ และสเกลระบบได้ง่าย
 
-  % To include an image in the figure, say myimage.pdf, you could use
-  % the following code. Look up the documentation for the package
-  % graphicx for more information.
-  % \includegraphics[width=\textwidth]{myimage}
+\indent จากแนวคิดดังกล่าวจะถูกนํามาประยุกต์ใช้ในระบบของเราโดยจะมีประโยชน์ ดังนี้
+\begin{enumerate}
+    \item \textbf{ความง่ายในการเข้าถึงและเข้าใจ}  
+    URL และ HTTP Methods มีความเป็นธรรมชาติ และสอดคล้องกับมาตรฐานสากล ทำให้ทีมพัฒนาต่างๆ เข้าใจได้ง่าย
+    \item \textbf{การทำงานแบบ Stateless}  
+    แต่ละ Request เป็นอิสระ ช่วยให้ระบบสามารถ scale ได้ง่ายขึ้น โดยเฉพาะในสภาพแวดล้อม Cloud หรือ Container
+    \item \textbf{การบูรณาการกับ Frontend/Backend}  
+    Frontend (Next.js / Vite) สามารถเรียกใช้ Logic ที่ซับซ้อน (เช่น Simulation Model) ผ่าน API แบบมาตรฐานโดยไม่ต้องรู้รายละเอียดเชิงลึกของ Backend
+    \item \textbf{สนับสนุนมาตรฐาน HTTP และเครื่องมือทั่วไป}  
+    เช่น curl, Postman ทำให้การทดสอบและบันทึกเอกสารทำได้สะดวก
+    \item \textbf{ความยืดหยุ่นในการพัฒนาและปรับปรุง}  
+    สามารถเพิ่ม Endpoint ใหม่หรือเปลี่ยนแปลง Backend ได้โดยไม่กระทบกับ Client หากยังคง Interface เดิม
+\end{enumerate}
 
-  \caption[Sample figure]{This figure is a sample containing \gls{lorem ipsum},
-  showing you how you can include figures and glossary in your report.
-  You can specify a shorter caption that will appear in the List of Figures.}
-  \label{fig:sample-figure}
-\end{figure}
+\subsection{Display Frontend}
+\subsubsection{Web Mapping and GIS Fundamentals}
+\indent Geographic Information Systems (GIS) เป็นระบบสารสนเทศที่ออกแบบมาเพื่อจัดเก็บ วิเคราะห์ 
+และแสดงข้อมูลเชิงพื้นที่ (Spatial Data) GIS ใช้แนวคิดหลักหลายประการ เช่น การแทนข้อมูลเชิงพื้นที่ในรูปแบบ Vector 
+และ Raster, การวิเคราะห์เชิงพื้นที่ (Spatial Analysis), การจัดการ Attribute Data 
+และการสร้าง Visualization เพื่อสนับสนุนการตัดสินใจ
+\begin{itemize}
+    \item \textbf{Vector Data Model}: แสดงข้อมูลเชิงพื้นที่ด้วยจุด (Point), เส้น (Line), และพื้นที่ (Polygon)
+    \begin{itemize}
+        \item จุด (Point) ใช้แทนป้ายรถโดยสารหรือสถานีขนส่ง
+        \item เส้น (Line) ใช้แทนเส้นทางการเดินรถหรือถนน
+        \item พื้นที่ (Polygon) ใช้แทนเขตเมืองหรือบริเวณให้บริการ
+    \end{itemize}
+    \item \textbf{Raster Data Model}: แสดงพื้นที่เป็นกริดของค่าต่างๆ เช่น ความสูง, ความหนาแน่นประชากร
+\end{itemize}
 
-Using \verb.\label. and \verb.\ref. commands allows us to refer to
-figures easily. If we can refer to Figures
-\ref{fig:walrus} and \ref{fig:sample-figure} by name in the {\LaTeX}
-source code, then we will not need to update the code that refers to it
-even if the placement or ordering of the figures changes.
+\begin{center}
+\fbox{%
+  \parbox{.8\textwidth}{%
+Haklay et al., 2008, OpenStreetMap: User-Generated Street Maps แสดงว่าเว็บแผนที่สามารถใช้แสดงข้อมูลเชิงพื้นที่ที่ซับซ้อน
+และสนับสนุนการตัดสินใจ เช่น การจัดสรรเส้นทางหรือการวางแผนระบบขนส่ง นอกจากนี้ 
+Goodchild, 2007, Citizens as Sensors: The World of Volunteered Geography 
+ชี้ให้เห็นว่า Web GIS สามารถผสมผสานข้อมูลจากผู้ใช้จริง(Crowdsourced Data) เพื่อสร้าง Heatmap 
+หรือ Visual Analytics ของปัญหาการจราจรหรือการรอคอยผู้โดยสาร
+  }%
+}
+\end{center}
 
-\loremipsum\loremipsum
+\indent แนวคิดดังกล่าวจะถูกนํามาประยุกต์ใช้ในระบบของเราเพื่อช่วยการแสดงเครือข่ายขนส่งสาธารณะบนแผนที่เว็บ ดังนี้ 
+\begin{enumerate}
+    \item \textbf{Vector Data Representation}
+    \begin{itemize}
+        \item Nodes (จุด) แทนป้ายรถ, สถานีขนส่ง, จุดขึ้นลงผู้โดยสาร
+        \item Links (เส้น) แทนเส้นทางของรถโดยสารหรือเส้นทางเดินรถ
+        \item การแทนข้อมูลด้วย Vector ทำให้สามารถคำนวณเชิงพื้นที่ เช่น หาทางที่สั้นที่สุด (Shortest Path), การคำนวณระยะทาง, การวิเคราะห์เครือข่าย (Network Connectivity)
+    \end{itemize}
+
+    \item \textbf{Visualization}
+    \begin{itemize}
+        \item Map Display: Leaflet.js แสดงข้อมูลเชิงพื้นที่บนเว็บ ทำให้ผู้ใช้เห็นโครงสร้างเครือข่ายขนส่ง
+        \item Heatmap / Thematic Map: แสดงข้อมูลเชิงปริมาณ เช่น พื้นที่ที่มีผู้โดยสารรอคอยสูง ความหนาแน่นผู้ใช้บริการ หรือเวลาเฉลี่ยการรอรถ
+        \item Interactive Map: ผู้ใช้สามารถ Zoom, Pan, หรือ Click เพื่อตรวจสอบรายละเอียดของ Nodes/Links
+    \end{itemize}
+\end{enumerate}
+
+\subsection{Database}
+\subsubsection{Geospatial Database (PostGIS Extension for PostgreSQL)}
+\indent Geospatial Database เป็นการขยายความสามารถของฐานข้อมูลเชิงสัมพันธ์ (RDBMS) 
+ให้สามารถจัดเก็บ วิเคราะห์ และสืบค้นข้อมูลเชิงพื้นที่ (Spatial Data) ได้ 
+ข้อมูลเชิงพื้นที่มักประกอบด้วยพิกัดทางภูมิศาสตร์ (Geographic Coordinates) 
+เช่น จุด, เส้น, พื้นที่ ซึ่งแตกต่างจากข้อมูลทั่วไปที่เป็นตัวเลขหรือข้อความ
+\begin{itemize}
+    \item การจัดเก็บข้อมูลแบบ \textbf{Geometry} และ \textbf{Geography}
+    \item การคำนวณเชิงพื้นที่ เช่น ระยะทาง, พื้นที่, การตัดกันของเส้นทาง (Intersections)
+    \item การวิเคราะห์เครือข่าย เช่น หาทางที่สั้นที่สุด (Shortest Path), การเชื่อมต่อเครือข่าย
+    \item การ Query Spatial เช่น การค้นหาวัตถุที่อยู่ในรัศมี X เมตร, การค้นหาจุดที่อยู่บนเส้นทางใด ๆ
+\end{itemize}
+
+\indent ได้นำแนวคิดมาประยุกต์ใช้กับระบบเครือข่ายขนส่งสาธารณะของเรา ดังนี้
+\begin{enumerate}
+    \item \textbf{การจัดเก็บข้อมูลเชิงพื้นที่ (Spatial Data Storage)}
+    \begin{itemize}
+        \item \textbf{Nodes}: ป้ายรถ, สถานีขนส่ง, จุดขึ้นลงผู้โดยสาร
+        \item \textbf{Links}: เส้นทางของรถ, เส้นทางเดินรถ
+        \item \textbf{Attribute Data}: ข้อมูลเสริม เช่น เวลาเปิด-ปิด, จำนวนผู้โดยสารเฉลี่ย, ประเภทเส้นทาง
+    \end{itemize}
+
+    \item \textbf{การคำนวณเชิงพื้นที่ (Spatial Computation)}
+    \begin{itemize}
+        \item คำนวณระยะทางระหว่าง Nodes หรือบน Links
+        \item หาทางที่สั้นที่สุดระหว่างจุดต้นทางและปลายทาง
+        \item วิเคราะห์ความเชื่อมโยงของเครือข่าย (Network Connectivity Analysis)
+    \end{itemize}
+    \item \textbf{การรวมกับ Web GIS และ Mapping Tools}
+    \begin{itemize}
+        \item ข้อมูลจาก PostGIS สามารถดึงไปใช้กับ Leaflet.js เพื่อสร้างแผนที่ Interactive และ Heatmap
+        \item สนับสนุนการวิเคราะห์และ Visualization แบบ Real-time
+    \end{itemize}
+\end{enumerate}
+
+
+
+% % define a command that produces some filler text, the lorem ipsum.
+% \newcommand{\loremipsum}{
+%   \textit{Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+%   eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+%   minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+%   aliquip ex ea commodo consequat. Duis aute irure dolor in
+%   reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+%   pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+%   culpa qui officia deserunt mollit anim id est laborum.}\par}
+
+% \begin{figure}
+%   \centering
+
+%   \fbox{
+%      \parbox{.6\textwidth}{\loremipsum}
+%   }
+
+%   % To include an image in the figure, say myimage.pdf, you could use
+%   % the following code. Look up the documentation for the package
+%   % graphicx for more information.
+%   % \includegraphics[width=\textwidth]{myimage}
+
+%   \caption[Sample figure]{This figure is a sample containing \gls{lorem ipsum},
+%   showing you how you can include figures and glossary in your report.
+%   You can specify a shorter caption that will appear in the List of Figures.}
+%   \label{fig:sample-figure}
+% \end{figure}
+
+% Using \verb.\label. and \verb.\ref. commands allows us to refer to
+% figures easily. If we can refer to Figures
+% \ref{fig:walrus} and \ref{fig:sample-figure} by name in the {\LaTeX}
+% source code, then we will not need to update the code that refers to it
+% even if the placement or ordering of the figures changes.
+
+% \loremipsum\loremipsum
 
 % This code demonstrates how to get a landscape table or figure. It
 % uses the package lscape to turn everything but the page number into
@@ -75,18 +199,7 @@ even if the placement or ordering of the figures changes.
   \end{landscape}
 }
 
-\loremipsum\loremipsum\loremipsum
-
-\section{Overfull hbox}
-
-When the \verb.semifinal. option is passed to the \verb.cpecmu. document class,
-any line that is longer than the line width, i.e., an overfull hbox, will be
-highlighted with a black solid rule:
-\begin{center}
-\begin{minipage}{2em}
-juxtaposition
-\end{minipage}
-\end{center}
+% \loremipsum\loremipsum\loremipsum
 
 \section{\ifenglish%
 \ifcpe CPE \else ISNE \fi knowledge used, applied, or integrated in this project
