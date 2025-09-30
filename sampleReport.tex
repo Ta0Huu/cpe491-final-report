@@ -26,9 +26,15 @@
 \usepackage[final]{graphicx} % for including graphics
 
 %% Add bookmarks and hyperlinks in the document.
+% Allow URLs to break across lines; xurl handles many cases better than url
+\usepackage{xurl}
 \PassOptionsToPackage{hyphens}{url}
-\usepackage[colorlinks=true,allcolors=Blue4,citecolor=red,linktoc=all]{hyperref}
-\def\UrlLeft#1\UrlRight{$#1$}
+% enable breaking of links in the PDF viewer and color links
+\usepackage[colorlinks=true,allcolors=Blue4,citecolor=red,linktoc=all,breaklinks=true]{hyperref}
+% make \url and long links use the surrounding (document) font instead of monospace
+\renewcommand{\UrlFont}{\normalfont}
+% remove custom \UrlLeft/\UrlRight redefinition which can prevent proper breaks
+% \def\UrlLeft#1\UrlRight{$#1$}
 
 %% Needed just by this example, but maybe not by most reports
 \usepackage{afterpage} % for outputting
