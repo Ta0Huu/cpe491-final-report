@@ -86,12 +86,12 @@
 \include{chapters/conclusion}
 \fi
 
-
-
 \bibliography{sampleReport}
 
 \ifproject
-\normalspacing
+\normalspacing% ...เนื้อหาทั้งหมด...
+
+
 \appendix
 \include{chapters/appendix}
 
@@ -109,4 +109,7 @@ Your biosketch goes here. Make sure it sits inside
 the \texttt{biosketch} environment.
 \end{biosketch}
 \fi % \ifproject
+
+\include{chapters/references}
+
 \end{document}
