@@ -304,3 +304,41 @@
     \end{itemize}
 
 \end{mypara}
+\section{รูปแบบไฟล์ข้อมูลนำเข้า (Supported Input File Formats)}
+\subsection{รูปแบบไฟล์ตารางการเดินรถ (Bus Schedule File Format)}
+\begin{mypara}
+    \indent รูปแบบไฟล์ตารางการเดินรถ ใช้สำหรับเก็บข้อมูลเวลาการออกรถของแต่ละสายบริการ 
+    โดยข้อมูลจะถูกจัดเก็บในไฟล์ Excel โดยมีสกุลไฟล์ \texttt{.xlsx} 
+    ซึ่งมีโครงสร้างดังแสดงในภาพด้านล่าง
+    \begin{figure}[H]
+      \centering
+      \includegraphics[scale=0.5]{bus_schedule.png}
+      \caption{รูปแบบไฟล์ตารางการเดินรถ}
+      \label{fig:BusScheduleFileFormat}
+    \end{figure}
+\end{mypara}
+
+\subsection{รูปแบบไฟล์ช่วงเวลาในการมาถึงของผู้โดยสาร (Passenger Arrival Time File Format)}
+\begin{mypara}
+    \indent รูปแบบไฟล์ช่วงเวลาในการมาถึงของผู้โดยสาร ใช้สำหรับเก็บข้อมูลช่วงเวลาที่ผู้โดยสารแต่ละคนมาถึงที่สถานี
+    โดยข้อมูลจะถูกจัดเก็บในไฟล์ Excel โดยมีสกุลไฟล์ \texttt{.xlsx} 
+    ซึ่งมีโครงสร้างดังแสดงในภาพด้านล่าง
+    \begin{figure}[H]
+      \centering
+      \includegraphics[scale=0.5]{Passenger_Interarrival.png}
+      \caption{รูปแบบไฟล์ช่วงเวลาในการมาถึงของผู้โดยสาร}
+      \label{fig:PassengerArrivalFileFormat}
+    \end{figure}
+\end{mypara}
+\subsection{รูปแบบไฟล์จำนวนผู้โดยสารที่ลงจากรถ (Passenger Alight File Format)}
+\begin{mypara}
+    \indent รูปแบบไฟล์จำนวนผู้โดยสารที่ลงจากรถ ใช้สำหรับเก็บข้อมูลจำนวนผู้โดยสารที่ลงจากรถในแต่ละสถานี
+    โดยข้อมูลจะถูกจัดเก็บในไฟล์ Excel โดยมีสกุลไฟล์ \texttt{.xlsx} 
+    ซึ่งมีโครงสร้างดังแสดงในภาพด้านล่าง
+    \begin{figure}[H]
+      \centering
+      \includegraphics[scale=0.5]{Passenger_alighting.png}
+      \caption{รูปแบบไฟล์จำนวนผู้โดยสารที่ลงจากรถ}
+      \label{fig:PassengerAlightFileFormat}
+    \end{figure}
+\end{mypara}
