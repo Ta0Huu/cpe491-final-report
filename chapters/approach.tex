@@ -57,9 +57,9 @@
   \indent เป็นส่วนที่แสดงผลลัพธ์ที่ได้จากการจำลอง โดยจะมีข้อมูล การรอเฉลี่ยของผู้โดยสาร อัตราการใช้งานของรถ 
   และอัตราการเกิดเหตุการณ์ที่รถบัสมีการใช้งานเกินเวลาหรือระยะทางที่กำหนด
   ซึ่งจะมีข้อมูลแสดงทั้งข้อมูลรวมทุกสถานี และข้อมูลรายละเอียดของแต่ละสถานีแยกกัน รวมถึงจะมี dashboard 
-  สำหรับแสดงผลลัพธ์ในรูปแบบกราฟเพื่อให้ผู้ใช้สามารถวิเคราะห์ข้อมูลได้ง่ายขึ้น
+  สำหรับแสดงผลลัพธ์ในรูปแบบกราฟเพื่อให้ผู้ใช้สามารถวิเคราะห์ข้อมูลได้ง่ายขึ้น 
 \end{mypara}
-\section{ ขั้นตอนการทำงาน}
+\section{ขั้นตอนการทำงานของระบบ (System Workflow)}
 \begin{mypara}
     \indent โครงงานนี้ทำงานโดยนำข้อมูลสถานการณ์จากผู้ใช้ (Scenario data) มาจำลองระบบขนส่งสาธารณะ 
     โดยอ้างอิงจากข้อมูลการกำหนดค่า (configuration data) ซึ่งประกอบด้วยข้อมูลหลายประเภท 
@@ -77,7 +77,7 @@
     ซึ่งสามารถเข้าถึงและแก้ไขได้ง่ายโดยไม่ต้องผ่านขั้นตอนที่ซับซ้อน 
     ส่วนข้อมูลพื้นฐานของระบบขนส่งสาธารณะ จะถูกจัดเก็บแยกเป็น configuration data 
     เพื่อให้ง่ายต่อการนำมาใช้ซ้ำ และมี workspace สำหรับการจัดการข้อมูลที่ช่วยให้ผู้ใช้สามารถ 
-    clone configuration data หรือ input จากผู้อื่นมาใช้งานและปรับแก้ได้สะดวก
+    clone configuration data หรือ scenario data จากผู้อื่นมาใช้งานและปรับแก้ได้สะดวก
 
   \indent ในส่วนของ output ได้ออกแบบให้สามารถแสดงผลได้ทั้งมุมมองภาพรวมและ
   รายละเอียดรายสถานี เพื่อให้ผู้ใช้ตรวจสอบข้อมูลเชิงลึกได้อย่างครบถ้วน นอกจากนี้ยังมี 
@@ -171,17 +171,17 @@
           \end{figure}
     \end{itemize}
 
-    \item Step 4: หลังจาก Setup Configuration data ทั้งหมดเรียบร้อยจะเข้าสู่หน้า Input page เพื่อกรอกข้อมูลสำหรับการจำลองบน Scenario ต่างๆ
+    \item Step 4: หลังจาก Setup Configuration data ทั้งหมดเรียบร้อยจะเข้าสู่หน้า Input Scenario page เพื่อกรอกข้อมูลสำหรับการจำลองบน Scenario ต่างๆ
       \begin{figure}[H]
         \centering
         \includegraphics[scale=0.4]{input_bus.png}
-        \caption{Wireframe ของหน้า Input page (bus) }
+        \caption{Wireframe ของหน้า Input Scenario page (bus) }
         \label{fig:WireframeInputGuest}
       \end{figure}
       \begin{figure}[H]
         \centering
         \includegraphics[scale=0.4]{input_route.png}
-        \caption{Wireframe ของหน้า Input page (route) }
+        \caption{Wireframe ของหน้า Input Scenario page (route) }
         \label{fig:WireframeInputRouteGuest}
       \end{figure}
 
@@ -277,18 +277,18 @@
 
     \end{itemize}
 
-    \item Step 4: หน้า Input page เพื่อกรอกข้อมูลสำหรับการจำลองบน Scenario ต่างๆ
+    \item Step 4: หน้า Input Scenario page เพื่อกรอกข้อมูลสำหรับการจำลองบน Scenario ต่างๆ
       \begin{figure}[H]
         \centering 
         \includegraphics[scale=0.4]{input_bus.png}
-        \caption{Wireframe ของหน้า Input page (bus) }
+        \caption{Wireframe ของหน้า Input Scenario page (bus) }
         \label{fig:WireframeInputLogin}
       \end{figure}
 
       \begin{figure}[H]
         \centering
         \includegraphics[scale=0.4]{input_route.png}
-        \caption{Wireframe ของหน้า Input page (route) }
+        \caption{Wireframe ของหน้า Input Scenario page (route) }
         \label{fig:WireframeInputRouteLogin}
       \end{figure}
 
