@@ -21,7 +21,7 @@
 \begin{mypara}
     \indent โครงงานนี้เป็นระบบสนับสนุนการตัดสินใจสำหรับการวางแผนระบบขนส่งสาธารณะ 
     โดยจะจัดทำเป็นเว็บแอพลิเคชั่นสำหรับการจำลอง และมีการสรุปผลลัพธ์ที่ได้จากการจำลองในรูปแบบทางสถิติ
-    ซึ่งในการทำงานของระบบนี้จะมี 4 องค์ประกอบหลักดังนี้  
+    ซึ่งในการทำงานของระบบนี้จะมี 4 องค์ประกอบหลักดังนี้ที่ประกอบกันเป็นระบบเดียวกัน ดังภาพ \ref{fig:overview}  
 \end{mypara}
 
 
@@ -159,7 +159,8 @@
 
 \subsection{โครงร่างหน้าจอผู้ใช้ที่ไม่ได้ลงทะเบียน (Guest Users / Unregistered Users)}
 \begin{itemize}
-    \item Step 1: ผู้ใช้จะเข้าสู่หน้า Landing page เพื่อเลือกระหว่างจะเข้าใช้ในโหมด Guest user หรือ Login user
+    \item Step 1: ผู้ใช้จะเข้าสู่หน้า Landing page เพื่อเลือกระหว่างจะเข้าใช้ในโหมด Guest user หรือ Login user 
+    ตามภาพ \ref{fig:WireframeHomepage}
       \begin{figure}[H]
         \centering
         \includegraphics[scale=0.35]
@@ -169,6 +170,7 @@
       \end{figure}
 
     \item Step 2: Guest user สามารถเลือกว่าจะใช้ข้อมูลที่มีอยู่ใน Community หรือเลือกที่จะ Setup ข้อมูลทั้งหมดเอง
+    ตามภาพ \ref{fig:WireframeGuestDecision}
       \begin{figure}[H]
         \centering
         \includegraphics[scale=0.35]
@@ -177,9 +179,10 @@
         \label{fig:WireframeGuestDecision}
       \end{figure}
 
-    \item Step 3: การใช้ข้อมูล Configuration data
+    \item Step 3: การใช้ข้อมูล Configuration data แบ่งเป็น 2 กรณี ดังนี้
     \begin{itemize}
-        \item กรณีที่เลือกใช้จากข้อมูลที่มีอยู่ใน Community
+        \item กรณีที่เลือกใช้จากข้อมูลที่มีอยู่ใน Community 
+        ตามภาพ \ref{fig:WireframeCommunityConfigGuest} และ \ref{fig:WireframeCommunityConfigDetailGuest}
           \begin{figure}[H]
             \centering
             \includegraphics[scale=0.4]{conf_commu_guest.png}
@@ -196,6 +199,7 @@
 
         \newpage
         \item กรณีที่ผู้ใช้เลือก Setup ข้อมูลทั้งหมดเอง จะเข้าสู่การ Setup Configuration ด้วยตนเอง
+        ตามภาพ \ref{fig:WireframeSetupConfigGuest}
           \begin{figure}[H]
             \centering
             \includegraphics[scale=0.4]{conf_setup_guest.png}
@@ -204,7 +208,8 @@
           \end{figure}
     \end{itemize}
 
-    \item Step 4: หลังจาก Setup Configuration data ทั้งหมดเรียบร้อยจะเข้าสู่หน้า Input Scenario page เพื่อกรอกข้อมูลสำหรับการจำลองบน Scenario ต่างๆ
+    \item Step 4: หลังจาก Setup Configuration data ทั้งหมดเรียบร้อยจะเข้าสู่หน้า Input Scenario page 
+    เพื่อกรอกข้อมูลสำหรับการจำลองบน Scenario ต่างๆ ตามภาพ \ref{fig:WireframeInputGuest} และ \ref{fig:WireframeInputRouteGuest}
       \begin{figure}[H]
         \centering
         \includegraphics[scale=0.4]{input_bus.png}
@@ -219,7 +224,7 @@
       \end{figure}
 
     \item Step 5: หลังจากผู้ใช้กดปุ่ม Run simulation แล้ว User จะสามารถเลือกดู  Dashboard สรุปผลข้อมูล 
-    หรือ Interacting Visualize
+    หรือ Interacting Visualize ตามภาพ \ref{fig:WireframeOutputGuest} และ \ref{fig:WireframeDashboardGuest}
       \begin{figure}[H]
         \centering
         \includegraphics[scale=0.4]{output_show.png}
@@ -240,6 +245,7 @@
 \subsection{โครงร่างหน้าจอของผู้ใช้ที่ลงทะเบียน (Registered Users)}
 \begin{itemize}
     \item Step 1:  ผู้ใช้จะเข้าสู่หน้า Landing page เพื่อเลือกระหว่างจะเข้าใช้ในโหมด Guest user หรือ Login user
+    ตามภาพ \ref{fig:WireframeHomepageLogin}
     \begin{figure}[H]
     \centering
     \includegraphics[scale=0.4]
@@ -250,6 +256,7 @@
 
     \newpage
     \item Step 2: หลังจากเข้าสู่ระบบผู้ใช้จะเข้าสู่หน้า My work ซึ่งเป็นการจัดการงานทั้งหมดของผู้ใช้
+    ตามภาพ \ref{fig:WireframeMyWork} และ \ref{fig:WireframeMyWorkPublish}
     \begin{itemize}
       \item ในหน้า My work ผู้ใช้สามารถเลือกใช้งานหรือ Publish งาน
         \begin{figure}[H]
@@ -268,17 +275,18 @@
         
       \newpage
       \item  ผู้ใช้สามารถสร้าง Work ใหม่ได้ด้วยการกดที่ปุ่ม New work โดยการสร้าง Work จะต้องอ้างอิงกับ Configuration data ที่มีอยู่
-        \begin{figure}[H]
+      ตามภาพ \ref{fig:WireframeNewWork}  
+      \begin{figure}[H]
         \centering
         \includegraphics[scale=0.4]{new_work.png}
         \caption{Wireframe ของหน้า New work}
         \label{fig:WireframeNewWork}
-        \end{figure}
+      \end{figure}
     \end{itemize}
 
-    \item Step 3: การใช้ข้อมูล Configuration data
+    \item Step 3: การใช้ข้อมูล Configuration data แบ่งเป็น 2 กรณี ดังนี้
     \begin{itemize}
-        \item กรณีที่เลือกใช้จากข้อมูลที่มีอยู่ใน Community
+        \item กรณีที่เลือกใช้จากข้อมูลที่มีอยู่ใน Community ตามภาพ \ref{fig:WireframeCommunityConfigLogin} และ \ref{fig:WireframeCommunityConfigDetailLogin}
           \begin{figure}[H]
             \centering
             \includegraphics[scale=0.4]{conf_commu.png}
@@ -293,7 +301,8 @@
             \label{fig:WireframeCommunityConfigDetailLogin}
           \end{figure}
 
-        \item ผู้ใช้สามารถสร้าง Configuration data ใหม่ได้ด้วยการกดที่ปุ่ม New Configuration และสามารถ Save Configuration เพื่อใช้ในงานต่อไปได้
+        \item ผู้ใช้สามารถสร้าง Configuration data ใหม่ได้ด้วยการกดที่ปุ่ม New Configuration และสามารถ Save Configuration 
+        เพื่อใช้ในงานต่อไปได้ ตามภาพ \ref{fig:WireframeNewConfigLogin} และ \ref{fig:WireframeSetupConfigLogin}
           \begin{figure}[H]
             \centering
             \includegraphics[scale=0.4]{new_conf.png}
@@ -310,7 +319,8 @@
 
     \end{itemize}
 
-    \item Step 4: หน้า Input Scenario page เพื่อกรอกข้อมูลสำหรับการจำลองบน Scenario ต่างๆ
+    \item Step 4: หน้า Input Scenario page เพื่อกรอกข้อมูลสำหรับการจำลองบน Scenario ต่างๆ 
+    ตามภาพ \ref{fig:WireframeInputLogin} และ \ref{fig:WireframeInputRouteLogin}
       \begin{figure}[H]
         \centering 
         \includegraphics[scale=0.4]{input_bus.png}
@@ -326,6 +336,7 @@
       \end{figure}
 
     \item Step 5: หลังจากผู้ใช้กดปุ่ม Run simulation แล้ว User จะสามารถเลือกดู  Dashboard สรุปผลข้อมูล 
+    ตามภาพ \ref{fig:WireframeOutputLogin} และ \ref{fig:WireframeDashboardLogin}
       \begin{figure}[H]
         \centering
         \includegraphics[scale=0.4]{output_show.png}
@@ -348,7 +359,7 @@
   \begin{mypara}
       \indent รูปแบบไฟล์ช่วงเวลาในการมาถึงของผู้โดยสาร ใช้สำหรับเก็บข้อมูลช่วงเวลาที่ผู้โดยสารแต่ละคนมาถึงที่สถานี
       โดยข้อมูลจะถูกจัดเก็บในไฟล์ Excel โดยมีสกุลไฟล์ \texttt{.xlsx} 
-      ซึ่งมีโครงสร้างดังแสดงในภาพด้านล่าง
+      ซึ่งมีโครงสร้างดังแสดงในภาพ \ref{fig:PassengerArrivalFileFormat}
       \begin{figure}[H]
         \centering
         \includegraphics[scale=0.5]{Passenger_Interarrival.png}
@@ -362,7 +373,7 @@
   \begin{mypara}
       \indent รูปแบบไฟล์จำนวนผู้โดยสารที่ลงจากรถ ใช้สำหรับเก็บข้อมูลจำนวนผู้โดยสารที่ลงจากรถในแต่ละสถานี
       โดยข้อมูลจะถูกจัดเก็บในไฟล์ Excel โดยมีสกุลไฟล์ \texttt{.xlsx} 
-      ซึ่งมีโครงสร้างดังแสดงในภาพด้านล่าง
+      ซึ่งมีโครงสร้างดังแสดงในภาพ \ref{fig:PassengerAlightFileFormat}
       \begin{figure}[H]
         \centering
         \includegraphics[scale=0.5]{Passenger_alighting.png}
@@ -375,7 +386,7 @@
   \begin{mypara}
       \indent รูปแบบไฟล์ตารางการเดินรถ ใช้สำหรับเก็บข้อมูลเวลาการออกรถของแต่ละสายบริการ 
       โดยข้อมูลจะถูกจัดเก็บในไฟล์ Excel โดยมีสกุลไฟล์ \texttt{.xlsx} 
-      ซึ่งมีโครงสร้างดังแสดงในภาพด้านล่าง
+      ซึ่งมีโครงสร้างดังแสดงในภาพ \ref{fig:BusScheduleFileFormat}
       \begin{figure}[H]
         \centering
         \includegraphics[scale=0.5]{bus_schedule.png}
