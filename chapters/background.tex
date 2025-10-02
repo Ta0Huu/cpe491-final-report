@@ -13,7 +13,7 @@
         โดยทั่วไปแล้วแบบจำลองนั้นมีหลายประเภท เราได้เลือกใช้ทฤษฎีและแนวคิดที่เหมาะสมกับการจำลองระบบขนส่งสาธารณะ ดังนี้
     \end{mypara}
 
-\subsection{Queuing Theory}
+\subsection{ทฤษฎีการรอคอย (Queuing Theory)}
 \begin{mypara}
     \indent ทฤษฎีการรอคอย (Queuing Theory) เป็นศาสตร์ทางคณิตศาสตร์และวิศวกรรมที่ใช้ในการวิเคราะห์พฤติกรรมของระบบที่มี 
     “การรอคอย” หรือ “แถวคิว” เกิดขึ้น โดยทั่วไป ระบบคิวจะประกอบด้วย 3 ส่วนหลัก ได้แก่ ลูกค้า (Customers), 
@@ -35,7 +35,7 @@
     \item \textbf{Customer Leaves/Departure (ผู้โดยสารลงจากรถ):} ผู้โดยสารลงจากรถหลังสิ้นสุดการเดินทาง ทำให้พื้นที่ในรถว่างสำหรับผู้โดยสารใหม่
 \end{enumerate}
 
-\subsection{Simulation Model}
+\subsection{แบบการจำลอง (Simulation Model)}
 \begin{mypara}
     \indent การสร้างตัวแทนทางคณิตศาสตร์หรือตรรกะของระบบจริง ที่เราสนใจศึกษา 
     วัตถุประสงค์หลักคือการทดลองและวิเคราะห์การทำงานของระบบภายใต้เงื่อนไขหรือการเปลี่ยนแปลงต่างๆ 
@@ -69,7 +69,7 @@
   \item สามารถวิเคราะห์ค่ากลาง ความแปรปรวน และความน่าจะเป็นของเหตุการณ์ต่างๆ
 \end{itemize}
 
-\subsection{Network Modeling}
+\subsection{แบบจำลองเครือข่าย (Network Modeling)}
 \begin{mypara}
     \indent การสร้างแบบจำลองเครือข่าย (Network Modeling) เป็นแนวคิดทางวิศวกรรมระบบและวิทยาการคอมพิวเตอร์ 
     ที่มุ่งเน้นการแทนโครงสร้างของระบบขนส่งหรือเครือข่ายการเชื่อมต่อ 
@@ -114,7 +114,7 @@
         เพื่อแยกส่วนการทำงานของระบบออกเป็นส่วนต่าง ๆ อย่างชัดเจน ทำให้ง่ายต่อการพัฒนา การบำรุงรักษา และการขยายระบบ
     \end{mypara}
 
-\subsection{Model-View-Controller (MVC) Architecture}
+\subsection{สถาปัตยกรรม Model-View-Controller (MVC)}
 \begin{mypara}
     \indent สถาปัตยกรรม Model-View-Controller (MVC) เป็นรูปแบบการออกแบบซอฟต์แวร์ (Software Architectural Pattern) 
     ที่ถูกเสนอครั้งแรกโดย Trygve Reenskaug ในปี 1979 เพื่อใช้ในการพัฒนาระบบที่มีการแยกส่วนของ 
@@ -135,7 +135,7 @@
 
 \indent ถูกนำมาประยุกต์ใช้กับระบบจำลองเครือข่ายขนส่งสาธารณะของเรา โดยมีการแบ่งหน้าที่อย่างชัดเจน ดังนี
 
-\subsection{Frontend Display}
+\subsection{ส่วนแสดงผลฟรอนต์เอนด์ (Frontend Display)}
 \begin{mypara}
     \indent ส่วนแสดงผลลัพธ์ให้กับผู้ใช้ โดยใช้ Vite
 สำหรับพัฒนาเว็บอินเตอร์เฟส และ Leaflet.js สำหรับการแสดงผลเชิงพื้นที่ 
@@ -222,7 +222,7 @@ TypeScript ถูกใช้เป็นภาษาหลักในการ
     \end{itemize}
 \end{enumerate}
 
-\subsubsection{User Interface / User Experience (UI/UX) Theory}
+\subsubsection{ส่วนโต้ตอบผู้ใช้ (User Interface / User Experience (UI/UX) Theory)}
 \begin{mypara}
     \indent หลักการออกแบบ User Interface (UI) และ User Experience (UX) มุ่งเน้นให้ผู้ใช้สามารถโต้ตอบกับระบบได้อย่างง่ายดาย
     มีประสิทธิภาพ และเกิดความพึงพอใจสูงสุด การออกแบบที่ดีช่วยให้ผู้ใช้สามารถเข้าใจข้อมูลเชิงซับซ้อน
@@ -259,7 +259,7 @@ TypeScript ถูกใช้เป็นภาษาหลักในการ
 \end{itemize}
 
 
-\subsection{Logical Model}
+\subsection{แบบเชิงตรรกะ (Logical Model)}
   ส่วนนี้รับผิดชอบด้าน business logic และ simulation model
   เช่น การคำนวณเวลาการเดินทาง การจำลองปริมาณผู้โดยสาร 
   และการวิเคราะห์ประสิทธิภาพของเส้นทาง โดยใช้เครื่องมือจำลอง 
@@ -300,7 +300,7 @@ TypeScript ถูกใช้เป็นภาษาหลักในการ
     \end{itemize}
 \end{enumerate}
 
-\subsection{API Controller}
+\subsection{ส่วนควบคุมเอพีไอ (API Controller)}
   ส่วนนี้ทำหน้าที่เป็นตัวกลางระหว่างผู้ใช้ (ผ่าน View) และแบบจำลอง (Model) 
   โดยใช้ GoFiber ในการจัดการ request/response
   เช่น การรับ Input (เช่น ตารางเวลา, จุดขึ้นลง) จากผู้ใช้ 
@@ -355,7 +355,7 @@ TypeScript ถูกใช้เป็นภาษาหลักในการ
     \item สนับสนุนการพัฒนาแบบ Concurrent และ Real-time เช่น WebSocket สำหรับ Live Updates
 \end{enumerate}
 
-\subsubsection{Relational Database Management System (RDBMS) Theory}
+\subsubsection{ระบบจัดการฐานข้อมูลเชิงสัมพันธ์ (RDBMS Theory)}
 \begin{mypara}
     \indent ระบบจัดการฐานข้อมูลเชิงสัมพันธ์ (Relational Database Management System: RDBMS) 
     เป็นหลักการจัดการข้อมูลที่ข้อมูลถูกเก็บในรูปแบบตาราง (Tables) 
